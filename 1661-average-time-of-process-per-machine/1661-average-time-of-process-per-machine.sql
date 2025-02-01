@@ -1,5 +1,11 @@
-# Write your MySQL query statement below
-SELECT a.machine_id, round(avg(b.timestamp-a.timestamp),3) as processing_time
-FROM Activity a join Activity b
-ON a.machine_id = b.machine_id and a.process_id = b.process_id and a.activity_type = 'start' and b.activity_type = 'end'
+-- There is a factory website that has several machines
+-- each running the same number of processes. 
+-- Write a solution to find the average time each machine takes to complete a process.
+
+select a1.machine_id, round(avg(b.timestamp-a.timestamp),3) as processing_time
+from Activity a1
+join Activity a2
+on a1.process_id=a2.process_id
+and a1.machine_id=a2.machine_id
+and a1.timestamp<a2.timestamp
 group by 1;
